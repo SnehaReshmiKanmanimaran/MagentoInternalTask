@@ -1,0 +1,13 @@
+type Query {
+    getCustomerShippingAddress(orderId: Int!, customerId: Int!): CustomerShippingAddress @resolver(class: "Tychons\\Adminaddress\\Model\\Resolver\\CustomerShippingAddressResolver") @doc(description: "Get customer shipping address by order ID and customer ID")
+}
+
+type CustomerShippingAddress {
+    firstname: String!
+    lastname: String!
+    street: [String!]!
+    city: String!
+    post_code: String!
+    region_code: String!
+    province: String!
+}

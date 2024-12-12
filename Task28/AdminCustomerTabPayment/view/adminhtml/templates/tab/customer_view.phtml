@@ -1,0 +1,56 @@
+<?php
+$orders = $block->getCustomerOrders();
+?>
+<div class="customer-orders">
+    <h2><strong>Customer Orders</strong></h2>
+    <?php if ($orders->getSize() > 0): ?>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th><strong><?php echo __('Order ID'); ?></strong></th>
+                    <th><strong><?php echo __('Product Name'); ?></strong></th>
+                    <th><strong><?php echo __('Product SKU'); ?></strong></th>
+                    <th><strong><?php echo __('Product Price'); ?></strong></th>
+                    <th><strong><?php echo __('Payment Method'); ?></strong></th>
+                    <th><strong><?php echo __('CC Type'); ?></strong></th>
+                    <th><strong><?php echo __('CC Last4'); ?></strong></th>
+                    <th><strong><?php echo __('CC Owner'); ?></strong></th>
+                    <th><strong><?php echo __('CC Exp Month'); ?></strong></th>
+                    <th><strong><?php echo __('CC Exp Year'); ?></strong></th>
+                    <th><strong><?php echo __('CC Start Month'); ?></strong></th>
+                    <th><strong><?php echo __('CC Start Year'); ?></strong></th>
+                    <th><strong><?php echo __('CC Issue'); ?></strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($orders as $order): ?>
+                    <?php $orderItems = $block->getOrderItems($order); ?>
+                    <?php $paymentDetails = $block->getPaymentDetails($order); ?>
+                    <?php foreach ($orderItems as $item): ?>
+                        <tr>
+                            <td><?php echo $item['order_id']; ?></td>
+                            <td><?php echo $item['product_name']; ?></td>
+                            <td><?php echo $item['product_sku']; ?></td>
+                            <td><?php echo $item['product_price']; ?></td>
+                            <?php if ($paymentDetails): ?>
+                                <td><?php echo $paymentDetails['method']; ?></td>
+                                <td><?php echo $paymentDetails['cc_type']; ?></td>
+                                <td><?php echo $paymentDetails['cc_last4']; ?></td>
+                                <td><?php echo $paymentDetails['cc_owner']; ?></td>
+                                <td><?php echo $paymentDetails['cc_exp_month']; ?></td>
+                                <td><?php echo $paymentDetails['cc_exp_year']; ?></td>
+                                <td><?php echo $paymentDetails['cc_ss_start_month']; ?></td>
+                                <td><?php echo $paymentDetails['cc_ss_start_year']; ?></td>
+                                <td><?php echo $paymentDetails['cc_ss_issue']; ?></td>
+                            <?php else: ?>
+                                <td colspan="8"><?php echo __('No payment details available'); ?></td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p><?php echo __('No orders found for this customer.'); ?></p>
+    <?php endif; ?>
+</div>

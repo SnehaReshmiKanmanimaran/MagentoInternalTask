@@ -1,0 +1,22 @@
+<h2><?= $escaper->escapeHtml($block->myFunction()); ?></h2>
+<?php
+$order = $block->getCurrentOrder();
+$orderId = $order->getId();
+$customerId = $block->getCustomerId($orderId);
+?>
+<?php
+$addressDetails = $block->getCustomerShippingAddressData($orderId, $customerId);
+?>
+<?php if ($addressDetails): ?>
+    <div>
+        <strong>Firstname:</strong> <?= $escaper->escapeHtml($addressDetails['firstname']); ?>
+        <strong>Lastname:</strong> <?= $escaper->escapeHtml($addressDetails['lastname']); ?>
+        <strong>Address:</strong> <?= $escaper->escapeHtml(implode(", ", $addressDetails['street'])); ?><br>
+        <strong>City:</strong> <?= $escaper->escapeHtml($addressDetails['city']); ?>
+        <strong>Post Code:</strong> <?= $escaper->escapeHtml($addressDetails['post_code']); ?>
+        <strong>Region Code:</strong> <?= $escaper->escapeHtml($addressDetails['region_code']); ?>
+        <strong>Province:</strong> <?= $escaper->escapeHtml($addressDetails['province']); ?>
+    </div>
+<?php else: ?>
+    <p>No shipping address found.</p>
+<?php endif; ?>
