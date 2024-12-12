@@ -1,0 +1,17 @@
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * @codingStandardsIgnoreFile
+ */
+     $customData = $block->getPriceForCurentProduct();
+    $currencySymbol = $this->helper('Tychons\PriceContent\Helper\Data')->getCurrencySymbol();
+    ?>
+<div class="price-content">
+<img src="<?php echo $block->getViewFileUrl('Tychons_PriceContent::images/flex.png'); ?>" alt="My Image"  width="35" height="35" style="vertical-align: middle; margin-right: 5px;"> <?php echo __('Or as low as'); ?><strong><?php echo $currencySymbol; ?><?php echo $customData; ?><?php echo __(' per month') ?></strong><?php echo __('  over 48 month(s).') ?><a href="#" target="_blank">Learn More</a>
+</div>
+
+ 

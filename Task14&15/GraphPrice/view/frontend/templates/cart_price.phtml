@@ -1,0 +1,78 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * @codingStandardsIgnoreFile
+ */
+    $emiPrice = $block->getCurrentQuotePrice();
+    $emiPrice = number_format((float)$emiPrice, 2, '.', ''); 
+    $currencySymbol = $this->helper('Tychons\GraphPrice\Helper\Data')->getCurrencySymbol();
+?>
+ <div class="price-content">
+    <img src="<?=$block->getViewFileUrl('Tychons_GraphPrice::images/flex.png'); ?>" alt="My Image" width="35" height="35" style="vertical-align: middle; margin-right: 5px;"><?= __('Or as low as'); ?>&nbsp;<strong><?=$currencySymbol; ?>&nbsp;<?=$emiPrice; ?><?=__(' per month') ?></strong><?=__('  over 48 month(s).') ?>
+    <!-- <a href="#" target="_blank">Learn More</a> -->
+    <a href="#" id="learn-more">Learn More</a>
+  <div id="popup-modal" style="display:none;">
+  <?php
+  $productDetails = $block->getCurrentQuoteProductDetails();
+?>
+<?php if (!empty($productDetails)): ?>
+    <table class="data table additional-info"> 
+                <th><?= 'Product Name' ?></th>
+                <th><?= 'Original Price' ?></th> 
+                <th><?= 'Offer Price' ?></th>
+                <th><?= 'SKU' ?></th>
+        <tbody>
+            <?php foreach ($productDetails as $details): ?>
+                <tr>
+                    <td><?= $details['name'] ?></td>
+                    <td><?= $details['originalPrice'] ?></td>
+                    <td><?= $details['offerprice'] ?></td>
+                    <td><?= $details['sku'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Product Description',
+                buttons: [{
+                    text: $.mage.__('Ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+            $("#learn-more").on('click',function(){ 
+                $("#popup-modal").modal("openModal");
+            });
+
+        }
+    );
+</script>
+</div> 
+
+   
+ 
+    
+
+
+ 
+

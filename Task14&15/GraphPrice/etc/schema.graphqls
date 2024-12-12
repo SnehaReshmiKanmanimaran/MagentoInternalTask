@@ -1,0 +1,7 @@
+type Query {
+    getCustomData(productId: Int!): PriceOutput @resolver(class: "Tychons\\GraphPrice\\Model\\Resolver\\CustomData") @doc(description: "Retrieve custom data for a product")
+}
+
+type PriceOutput {
+    output: Float
+}

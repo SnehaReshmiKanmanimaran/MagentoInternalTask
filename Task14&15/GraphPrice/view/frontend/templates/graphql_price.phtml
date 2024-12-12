@@ -1,0 +1,71 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * @codingStandardsIgnoreFile
+ */
+     $currentProductId = $block->getProductId();
+     $productPriceData = $block->getPriceByGraphQl($currentProductId);
+    $currencySymbol = $this->helper('Tychons\GraphPrice\Helper\Data')->getCurrencySymbol();
+    ?>
+  <div class="price-content">
+<img src="<?php echo $block->getViewFileUrl('Tychons_GraphPrice::images/flex.png'); ?>" alt="My Image"  width="35" height="35" style="vertical-align: middle; margin-right: 5px;"> <?php echo __('Or as low as'); ?>&nbsp;
+<strong><?php echo $currencySymbol; ?></strong>
+<strong>
+  <?php echo $productPriceData; ?><?php echo __(' per month') ?></strong><?php echo __('  over 48 month(s).') ?>
+  <!-- <a href="#" target="_blank">Learn More</a> -->
+  <a href="#" id="learn-more">Learn More</a>
+  <div id="popup-modal" style="display:none;">
+     
+    <?php
+    $productDetails = $block->getCurrentProductDetails($currentProductId);
+    ?>
+     
+    <?php if (!empty($productDetails)): ?>
+        <th><strong>Name:</strong></th> <?php echo $productDetails['name']; ?></p>
+        <th><strong>OfferPrice:</strong></th><?php echo $productDetails['offerprice']; ?></p>
+        <th><strong>Price:</strong></th><?php echo $productDetails['originalPrice']; ?></p>
+        <th><strong>SKU:</strong></th> <?php echo $productDetails['sku']; ?></p>
+    <?php else: ?>
+        <p>No product details available.</p>
+    <?php endif; ?>
+</div>
+  
+
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Product Description',
+                buttons: [{
+                    text: $.mage.__('Ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+            $("#learn-more").on('click',function(){ 
+                $("#popup-modal").modal("openModal");
+            });
+
+        }
+    );
+</script>
+</div> 
+
+   
+ 

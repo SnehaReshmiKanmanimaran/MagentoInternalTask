@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+ <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.totals.container">
+        <!-- <referenceContainer name="cart.container"> -->
+   <block class="Tychons\GraphPrice\Block\GraphqlPrice" name="checkout.cart.custom.block" after="checkout.cart.totals" template="Tychons_GraphPrice::cart_price.phtml"/>
+        </referenceContainer>
+    </body>
+ </page>

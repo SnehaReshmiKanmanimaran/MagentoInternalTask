@@ -1,0 +1,28 @@
+<?php
+    /**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * @codingStandardsIgnoreFile
+ */
+    $emiPrice = $block->getCurrentQuotePrice();
+    $emiPrice = number_format((float)$emiPrice, 2, '.', '');
+    $currencySymbol = $this->helper('Tychons\PriceContent\Helper\Data')->getCurrencySymbol();
+     
+?>
+<div class="price-content">
+<img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_PriceContent::images/flex.png')) ?>" 
+     alt="My Image" 
+     width="35" 
+     height="35" 
+     style="vertical-align: middle; margin-right: 5px;">
+    <?= $escaper->escapeHtml(__('Or as low as')) ?>
+    <strong><?= $escaper->escapeHtml($currencySymbol . $emiPrice . __(' per month')) ?></strong>
+    <?= $escaper->escapeHtml(__(' over 48 month(s).')) ?>
+    <a href="#" target="_blank"><?= $escaper->escapeHtml(__('Learn More')) ?></a>
+</div>
+
+
+ 

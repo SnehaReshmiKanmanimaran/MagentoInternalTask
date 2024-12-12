@@ -1,0 +1,20 @@
+<?php
+    $emiPrice = $block->getCurrentProductPrice();
+    $emiPrice = number_format((float)$emiPrice, 2, '.', '');
+    //$currencySymbol = $block->helper(\Tychons\PriceContent\Helper\Data::class)->getCurrencySymbol();
+    /** @var \Tychons\PriceContent\ViewModel\PriceContentViewModel $viewModel */
+     $viewModel = $block->getData('viewModel');
+?>
+<div class="price-content">
+<img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_PriceContent::images/flex.png')) ?>" 
+     alt="My Image" 
+     width="35" 
+     height="35" 
+     style="vertical-align: middle; margin-right: 5px;">
+    <?= $escaper->escapeHtml(__('Or as low as')) ?>
+    <strong><?= $escaper->escapeHtml($viewModel . $emiPrice . __(' per month')) ?></strong>
+    <?= $escaper->escapeHtml(__(' over 48 month(s).')) ?>
+<a href="#" target="_blank"><?= $escaper->escapeHtml(__('Learn More')) ?></a>
+</div>
+
+ 
