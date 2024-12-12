@@ -1,0 +1,13 @@
+<?php
+ 
+$actionUrl = $block->getUrl('checkout/order/place');
+?>
+
+<form id="custom-checkout-form" method="post" action="<?= $actionUrl ?>">
+    <!-- Include onepage.phtml here -->
+    <?php echo $block->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Tychons_OnePageCheckout::onepage.phtml')->toHtml(); ?>
+
+    <button type="submit" id="place-order-button" class="action primary">
+        <span><?= __('Place Order') ?></span>
+    </button>
+</form>

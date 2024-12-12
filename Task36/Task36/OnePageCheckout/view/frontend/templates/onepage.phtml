@@ -1,0 +1,236 @@
+<div class="heading" style="display: flex; align-items: center;">
+    <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_OnePageCheckout::images/basket.jpeg')) ?>" 
+     alt="My Image" 
+     width="35" 
+     height="45"  style="margin-right: 10px;">
+     <h1 style="margin: 0; font-size: 35px;"><strong><u>One Page Checkout Extension</u></strong></h1>
+</div>
+<fieldset>
+    <legend><h2 style="color:blue;"><strong><u><i>Payment Methods</i></u></strong></h2></legend>
+    <?php
+        $paymentMethods = $block->getPaymentMethods();
+        if (is_array($paymentMethods) && !empty($paymentMethods)): ?>
+            <?php foreach ($paymentMethods as $code => $data): ?>
+                <div>
+                    <input type="radio" name="payment_method" value="<?php echo $code ?>" id="payment_method_<?php echo $code ?>" required>
+                    <label for="payment_method_<?php echo $code ?>">
+                        <?php echo isset($data['title']) ? $data['title'] : $code; ?>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No payment methods available.</p>
+        <?php endif; ?>
+</fieldset>
+
+<fieldset>
+    <legend><h2 style="color:blue;"><strong><u><i>Shipping Methods</i></u></strong></h2></legend>
+    <div class="checkout-singlepage">
+        <div class="shipping-methods">
+            <?php 
+            $activeShippingMethods = $block->getActiveShippingMethods();
+            ?>
+            <?php if ($activeShippingMethods): ?>
+                <?php foreach ($activeShippingMethods as $methods): ?>
+                    <ul class="shipping-method" style="margin-bottom: 5px; padding-left: 0;"> <!-- Reduced margin-bottom and removed padding-left -->
+                        <li style="list-style: none;">
+                            <input type="radio" name="shipping_method" id="shipping_method_<?php echo $methods['value']; ?>" value="<?php echo $methods['value']; ?>" style="margin-right: 5px;"> <!-- Adjust margin-right -->
+                            <label for="shipping_method_<?php echo $methods['value']; ?>" style="margin: 0; padding: 0;">
+                                <?php echo $methods['label']; ?>
+                            </label>
+                        </li>
+                    </ul>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <li class="no-shipping-methods">No shipping methods available. Please check your address or contact us for assistance.</li>
+            <?php endif; ?>
+        </div>
+    </div>
+</fieldset>
+
+<!-- Add spacing below Shipping Methods -->
+<div style="margin-bottom: 30px;"></div> <!-- Adjust the value as needed -->
+
+<fieldset>
+    <?php
+    /** @var \Tychons\OnePageCheckout\Block\Checkout $block */
+    $addresses = $block->getAddresses();
+    ?>
+
+    <h2 style="color:blue;"><strong><u><i>Shipping Addresses</i></u></strong></h2>
+    <?php if ($block->getCustomerSession()->isLoggedIn()): ?>
+        <?php if (!empty($addresses)): ?>
+            <?php foreach ($addresses as $address): ?>
+                <div class="address-box">
+                    <!-- <input type="radio" name="address" id="address_id<?php //echo $address->getId(); ?>" value="<?//= $address->getId() ?>" -->
+                    <input type="radio" name="address_id" id="address_id<?php echo $address->getId(); ?>" value="<?= $address->getId() ?>"   
+                        <?php if ($address->getIsFirst()): ?> checked <?php endif; ?> required>
+                    <label for="address_id<?php echo $address->getId(); ?>">
+                        <p><strong><?= $address->getFirstname() . ' ' . $address->getLastname() ?></strong></p>
+                        <p><?= implode(", ", $address->getStreet()) ?></p>
+                        <p><?= $address->getCity() ?>,
+                            <?php if ($address->getRegion() instanceof \Magento\Customer\Model\Data\Region): ?>
+                                <?= $address->getRegion()->getRegion() ?>
+                            <?php else: ?>
+                                <?= $address->getRegion() ?>
+                            <?php endif; ?>
+                        </p>
+                        <p><?= $address->getPostcode() ?></p>
+                        <p><?= $address->getCountryId() ?></p>
+                        <p><?= $address->getTelephone() ?></p>
+                    </label>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No shipping addresses found.</p>
+        <?php endif; ?>
+
+        <!-- Add New Address Button, displayed once -->
+        <p><button type="button" id="add-new-address-button" class="action primary">+ Add New Address</button></p>
+         
+        <!-- Address Modal Form -->
+        <div id="address-modal" class="new-address-form" style="display: none;">
+            <form id="new-address-form" action="<?= $escaper->escapeUrl($block->getUrl('checkout/address/save')); ?>" method="post">
+                <h3>Add New Address</h3>
+                <p><input type="text" name="firstname" placeholder="First Name" required></p>
+                <p><input type="text" name="lastname" placeholder="Last Name" required></p>
+                <p><input type="text" name="street[]" placeholder="Street Address" required></p>
+                <p><input type="text" name="city" placeholder="City" required></p>
+                <p>
+                    <select name="region" required>
+                        <option value=""><?= __('State/Province') ?></option>
+                        <?php foreach ($block->getRegions() as $region): ?>
+                            <option value="<?php echo $region['value']; ?>"><?php echo $region['label']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+                <p><input type="text" name="postcode" placeholder="Postal Code" required></p>
+                <p>
+                    <select name="country_id" required>
+                        <option value=""><?= __('Country') ?></option>
+                        <?php foreach ($block->getCountries() as $country): ?>
+                            <option value="<?php echo $country['value']; ?>"><?php echo $country['label']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+                <p><input type="text" name="telephone" placeholder="Telephone" required></p>
+                <p>
+                    <button type="button" class="action primary" id="modal-cancel"><?= __('Cancel') ?></button>
+                    <button type="submit" class="action primary"><?= __('Save Address') ?></button>
+                </p>
+            </form>
+            <div id="message"></div>
+        </div>
+    <?php else: ?>
+        <div class="guest-address-form">
+    <h3>Guest Checkout - Add Shipping Address</h3>
+    <form id="guest-address-form" action="<?php echo $block->getUrl('checkout/guest/addaddress'); ?>" method="post">
+        <input type="hidden" name="quote_id" value="<?php echo $block->getQuoteId(); ?>">
+        <p><input type="text" name="firstname" placeholder="First Name" required></p>
+        <p><input type="text" name="lastname" placeholder="Last Name" required></p>
+        <p><input type="text" name="street[]" placeholder="Street Address" required></p>
+        <p><input type="text" name="city" placeholder="City" required></p>
+        <p>
+            <select name="region" id="region" required>
+                <option value=""><?= __('State/Province') ?></option>
+                <?php foreach ($block->getRegions() as $region): ?>
+                    <option value="<?php echo $region['value']; ?>"><?php echo $region['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </p>
+        <p><input type="text" name="postcode" placeholder="Postal Code" required></p>
+        <p>
+            <select name="country" required>
+                <option value=""><?= __('Country') ?></option>
+                <?php foreach ($block->getCountries() as $country): ?>
+                    <option value="<?php echo $country['value']; ?>"><?php echo $country['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </p>
+        <p><input type="text" name="telephone" placeholder="Telephone" required></p>
+        <p><input type="email" name="email" id="email" placeholder="Email Address" required></p>
+        <p>
+            <button type="submit" class="action primary"><?= __('Save Guest Address') ?></button>
+        </p>
+    </form>
+    <div id="guest-message"></div>
+    <div id="guest-address-details"></div>
+</div>
+
+    <?php endif; ?>
+</fieldset>
+
+<fieldset>
+    <legend><h2 style="color:blue;"><strong><u><i>Order Summary</i></u></strong></h2></legend>
+    <div class="checkout-cart-index">
+        <?php
+        /** @var \Tychons\CustomOrderSummary\Block\OrderSummary $block */
+        $quote = $block->getQuote();
+        $items = [];
+        $totals = [];
+     
+        if ($quote) {
+            $items = $quote->getAllVisibleItems();
+            $totals = $block->getTotals();
+        }
+        ?>
+        <div class="cart-summary">
+            <h5><strong><u><?= __('Order Summary') ?></u></strong></h5>
+            <?php if ($quote && $items): ?>
+                <table class="data table totals">
+                    <thead>
+                        <tr>
+                            <th><?= __('Product Image') ?></th>
+                            <th><?= __('Product Name') ?></th>
+                            <th><?= __('Price') ?></th>
+                            <th><?= __('Qty') ?></th>
+                            <th><?= __('Subtotal') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($items as $item): ?>
+                            <tr>
+                                <td>
+                                    <img src="<?= $block->getImageUrl($item->getProduct()) ?>" alt="<?= $item->getName() ?>" width="75"/>
+                                </td>
+                                <td><?= $item->getName() ?></td>
+                                <td><?= $block->formatPrice($item->getPrice()) ?></td>
+                                <td><?= $item->getQty() ?></td>
+                                <td><?= $block->formatPrice($item->getRowTotal()) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                        <?php foreach ($totals as $total): ?>
+                            <tr class="totals">
+                                <th colspan="4" class="mark" scope="row"><?= $total->getTitle() ?></th>
+                                <td class="amount"><span class="price"><?= $block->formatPrice($total->getValue()) ?></span></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tfoot>
+                </table>
+            <?php else: ?>
+                <p><?= __('No items in your order summary.') ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+</fieldset>
+            
+
+<!-- Add spacing below Order Summary -->
+<div style="margin-bottom: 30px;"></div> <!-- Adjust the value as needed -->
+
+<button type="button" id="place-order-button" class="action primary">
+    <span><?= __('Place Order') ?></span>
+</button>
+
+<!-- <script type="text/javascript">
+    require([ 'jquery', 'jquery/ui'], function($){ 
+        alert("test");
+        $("#place-order-button" ).click(function() {
+        alert("Test!");
+    });
+        $(document).ready(function($) {
+        alert("test");
+}); });
+</script> -->

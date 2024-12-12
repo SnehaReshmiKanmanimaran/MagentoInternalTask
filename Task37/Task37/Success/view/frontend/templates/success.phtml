@@ -1,0 +1,153 @@
+<?php
+$orderDetails = $block->getOrderDetails();
+if (!empty($orderDetails)): ?>
+
+<div class="order-success-details">
+<div class="checkout-success" style="display: flex; align-items: center;  margin-top: 20px;">
+    <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_Success::images/b.png')) ?>" 
+         alt="My Image" 
+         width="35" 
+         height="35" 
+         style="margin-right: 5px;">
+    <h1 style="margin: 0; font-weight: bold;"><?php echo __('Checkout Success Page Extension'); ?></h1>
+</div>
+
+  <!-- Container for payment and shipping methods -->
+  <div class="methods-container" style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <!-- payment methods -->
+    <div class="payment-methods" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; margin-right: 20px;">
+        <div style="display: flex; align-items: center; background-color: #b2b2b2; padding: 10px;">
+            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_Success::images/card.png')) ?>" 
+                 alt="My Image" 
+                 width="30" 
+                 height="30" 
+                 style="margin-right: 10px;">
+            <h2 style="margin: 0; font-weight: bold;">
+                <?php echo __('Payment Method'); ?>
+            </h2>
+        </div>
+        <br>
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['payment_method']); ?></h3>
+    </div>
+
+    <!-- shipping methods -->
+    <div class="shipping-methods" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0;">
+        <div style="display: flex; align-items: center; background-color: #b2b2b2; padding: 10px;">
+            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_Success::images/t.png')) ?>" 
+                 alt="My Image" 
+                 width="30" 
+                 height="30" 
+                 style="margin-right: 10px;">
+            <h2 style="margin: 0; font-weight: bold;"><?php echo __('Shipping Method'); ?></h2>
+        </div>
+        <br>
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['shipping_method']); ?></h3>
+    </div>
+    
+  <!-- Shipping Address -->
+<div class="shipping-address" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px;">
+    <div style="display: flex; align-items: center; background-color: #b2b2b2; padding: 10px;">
+        <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_Success::images/home.png')) ?>" 
+             alt="My Image" 
+             width="30" 
+             height="30" 
+             style="margin-right: 10px;">
+        <h2 style="margin: 0; font-weight: bold;"><?php echo __('Shipping Address'); ?></h2>
+    </div>
+    <br>
+    <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['shipping_address']['firstname'] . ' ' . $orderDetails['shipping_address']['lastname']); ?></h3>
+    
+    <?php if (isset($orderDetails['shipping_address']['street']) && is_array($orderDetails['shipping_address']['street'])): 
+        foreach ($orderDetails['shipping_address']['street'] as $streetLine): ?>
+            <h3 style="margin: 0;"><?php echo htmlspecialchars($streetLine); ?></h3>
+        <?php endforeach; 
+    else: ?>
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['shipping_address']['street']); ?></h3>
+    <?php endif; ?>
+    
+    <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['shipping_address']['city'] . ', ' . $orderDetails['shipping_address']['region'] . ', ' . $orderDetails['shipping_address']['postcode']); ?></h3>
+    <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['shipping_address']['country_id']); ?></h3>
+    <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['shipping_address']['telephone']); ?></h3>
+</div>
+
+</div>
+
+         
+<div class="container" style="display: flex; justify-content: space-between; margin-top: 20px;">
+
+    <!-- Billing Address -->
+    <div class="billing-address" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-right: 10px;">
+        <div style="display: flex; align-items: center; background-color: #b2b2b2; padding: 10px;">
+            <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_Success::images/home.png')) ?>" 
+                 alt="My Image" 
+                 width="30" 
+                 height="30" 
+                 style="margin-right: 10px;">
+            <h2 style="margin: 0; font-weight: bold;"><?php echo __('Billing Address'); ?></h2>
+        </div>
+        <br>
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['billing_address']['firstname'] . ' ' . $orderDetails['billing_address']['lastname']); ?></h3>
+        
+        <?php if (isset($orderDetails['billing_address']['street']) && is_array($orderDetails['billing_address']['street'])): 
+            foreach ($orderDetails['billing_address']['street'] as $streetLine): ?>
+                <h3 style="margin: 0;"><?php echo htmlspecialchars($streetLine); ?></h3>
+            <?php endforeach; 
+        else: ?>
+            <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['billing_address']['street']); ?></h3>
+        <?php endif; ?>
+        
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['billing_address']['city'] . ', ' . $orderDetails['billing_address']['region'] . ', ' . $orderDetails['billing_address']['postcode']); ?></h3>
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['billing_address']['country_id']); ?></h3>
+        <h3 style="margin: 0;"><?php echo htmlspecialchars($orderDetails['billing_address']['telephone']); ?></h3>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary" style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0px; margin-right: 300px;">
+        <?php if (isset($orderDetails['order_items']) && !empty($orderDetails['order_items'])): ?>
+            <div style="display: flex; align-items: center;  background-color: #b2b2b2; padding: 10px;">
+                <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_Success::images/tick.png')) ?>" 
+                     alt="My Image" 
+                     width="30" 
+                     height="30" 
+                     style="margin-right: 10px;">
+                <h2 style="margin: 0; font-weight: bold;"><?php echo __('Order Summary'); ?></h2>
+            </div>
+            
+            <table class="order-items-table" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #333; padding: 8px; text-align: left; font-size: 1.17em;"><?php echo __('Product Name'); ?></th>
+                        <th style="border: 1px solid #333; padding: 8px; text-align: left; font-size: 1.17em;"><?php echo __('Image'); ?></th>
+                        <th style="border: 1px solid #333; padding: 8px; text-align: left; font-size: 1.17em;"><?php echo __('Price'); ?></th>
+                        <th style="border: 1px solid #333; padding: 8px; text-align: left; font-size: 1.17em;"><?php echo __('Quantity'); ?></th>
+                        <th style="border: 1px solid #333; padding: 8px; text-align: left; font-size: 1.17em;"><?php echo __('Subtotal'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orderDetails['order_items'] as $item): ?>
+                        <tr>
+                            <td style="border: 1px solid #333; padding: 8px; font-size: 1em;">
+                                <h3 style="margin: 0;"><?php echo htmlspecialchars($item['name']); ?></h3>
+                            </td>
+                            <td style="border: 1px solid #333; padding: 8px; text-align: center;">
+                                <?php if (!empty($item['image_url'])): ?>
+                                    <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" width="50" height="50" style="display: block; margin: 0 auto;" />
+                                <?php endif; ?>
+                            </td>
+                            <td style="border: 1px solid #333; padding: 8px; font-size: 1em;">
+                                <h3 style="margin: 0;"><?php echo htmlspecialchars($item['price']); ?></h3>
+                            </td>
+                            <td style="border: 1px solid #333; padding: 8px; font-size: 1em;">
+                                <h3 style="margin: 0;"><?php echo htmlspecialchars($item['quantity']); ?></h3>
+                            </td>
+                            <td style="border: 1px solid #333; padding: 8px; font-size: 1em;">
+                                <h3 style="margin: 0;"><?php echo htmlspecialchars($item['subtotal']); ?></h3>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+        <?php endif; ?>
+    </div>
+</div>

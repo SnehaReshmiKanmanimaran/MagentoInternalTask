@@ -1,0 +1,22 @@
+<div class="checkout-singlepage">
+    <h2 style="color:blue;"><strong><u><i>Shipping Methods</i></u></strong></h2>
+    <div class="shipping-methods">
+        <?php 
+        $activeShippingMethods = $block->getActiveShippingMethods();
+        ?>
+        <?php if ($activeShippingMethods): ?>
+            <?php foreach ($activeShippingMethods as $carrierCode => $carrierConfig): ?>
+                <ul class="shipping-method" style="margin-bottom: 5px; padding-left: 0;"> <!-- Reduced margin-bottom and removed padding-left -->
+                    <li style="list-style: none;">
+                        <input type="radio" name="shipping_method" id="shipping_method_<?php echo $carrierCode; ?>" value="<?php echo $carrierCode; ?>" style="margin-right: 5px;"> <!-- Adjust margin-right -->
+                        <label for="shipping_method_<?php echo $carrierCode; ?>" style="margin: 0; padding: 0;">
+                            <?php echo $carrierConfig['title']; ?>
+                        </label>
+                    </li>
+                </ul>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <li class="no-shipping-methods">No shipping methods available. Please check your address or contact us for assistance.</li>
+        <?php endif; ?>
+    </div>
+</div>

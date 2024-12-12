@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Tychons_AdminGrid::grids" 
+             title="Grids" 
+             translate="title" 
+             module="Tychons_AdminGrid" 
+             sortOrder="20" 
+             resource="Tychons_AdminGrid::grids"/>
+        <add id="Tychons_AdminGrid::grids_custom_dp" 
+             title="Custom Data Provider" 
+             translate="title" 
+             module="Tychons_AdminGrid" 
+             sortOrder="10" 
+             parent="Tychons_AdminGrid::grids" 
+             action="grids/custom/customDataProvider/" 
+             resource="Tychons_AdminGrid::grids_custom_dp"/>
+    </menu>
+</config>

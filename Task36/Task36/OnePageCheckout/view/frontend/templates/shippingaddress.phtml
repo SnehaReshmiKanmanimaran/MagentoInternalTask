@@ -1,0 +1,66 @@
+<div class="shipping-address">
+    <h2 style="color:blue;"><strong><u><i>Shipping Address</i></u></strong></h2>
+    <?php $shippingAddress = $block->getShippingAddress(); ?>
+    <?php $customer = $block->getCustomerLoggedIn(); ?>
+
+    <?php if ($customer): ?>
+        <div class="address-container">
+            <div class="default-address-box">
+                <?php if ($shippingAddress): ?>
+                    <div class="address-box">
+                        <input type="radio" name="shipping_address" id="default-address" value="<?= $shippingAddress->getId() ?>" checked>
+                        <label for="default-address">
+                            <p><strong><?= $shippingAddress->getFirstname() . ' ' . $shippingAddress->getLastname() ?></strong></p>
+                            <p><?= implode(", ", $shippingAddress->getStreet()) ?></p>
+                            <p><?= $shippingAddress->getCity() ?>,
+                                <?php if ($shippingAddress->getRegion() instanceof \Magento\Customer\Model\Data\Region): ?>
+                                    <?= $shippingAddress->getRegion()->getRegion() ?>
+                                <?php else: ?>
+                                    <?= $shippingAddress->getRegion() ?>
+                                <?php endif; ?>
+                            </p>
+                            <p><?= $shippingAddress->getPostcode() ?></p>
+                            <p><?= $shippingAddress->getCountryId() ?></p>
+                            <p><?= $shippingAddress->getTelephone() ?></p>
+                        </label>
+                    </div>
+                    <p><button type="button" id="add-new-address-button" class="action primary">+ Add New Address</button></p>
+                <?php else: ?>
+                    <p>No default shipping address found.</p>
+                <?php endif; ?>
+            </div>
+            <div id="address-modal" class="new-address-form">
+            <form id="new-address-form" action="<?= $escaper->escapeUrl($block->getUrl('checkout/address/save')); ?>" method="post">
+            <h3>Add New Address</h3>
+            <p><input type="text" name="firstname" placeholder="First Name" required></p>
+            <p><input type="text" name="lastname" placeholder="Last Name" required></p>
+            <p><input type="text" name="street[]" placeholder="Street Address" required></p>
+            <p><input type="text" name="city" placeholder="City" required></p>
+            <p>
+                <select name="region" required>
+                    <option value=""><?= __('State/Province') ?></option>
+                    <?php foreach ($block->getRegions() as $region): ?>
+                        <option value="<?php echo $region['value']; ?>"><?php echo $region['label']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                </p>
+                <p><input type="text" name="postcode" placeholder="Postal Code" required></p>
+                <p>
+                <select name="country" required>
+                    <option value=""><?= __('Country') ?></option>
+                    <?php foreach ($block->getCountries() as $country): ?>
+                        <option value="<?php echo $country['value']; ?>"><?php echo $country['label']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+               </p>
+           <p><input type="text" name="telephone" placeholder="Telephone" required></p>
+           <p>
+        <button type="button" class="action primary" id="modal-cancel"><?= __('Cancel') ?></button>
+        <button type="submit" class="action primary"><?= __('Save Address') ?></button>
+            </p>
+</form>
+<div id="message"></div>
+            </div>
+        </div>
+</div>
+<?php endif; ?>

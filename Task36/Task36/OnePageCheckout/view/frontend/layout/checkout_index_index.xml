@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Include CSS and JavaScript files -->
+        <css src="Tychons_OnePageCheckout::css/custom-order-summary.css"/>
+        <script src="Tychons_OnePageCheckout::js/modal.js"/>
+        <script src="Tychons_OnePageCheckout::js/guest.js"/>
+        <script src="Tychons_OnePageCheckout::js/place-order.js"/>
+         <script src="Tychons_OnePageCheckout::js/address-selector.js"/>
+        
+        
+        
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Tychons\OnePageCheckout\Block\Checkout" name="checkout.root" template="Tychons_OnePageCheckout::onepage.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="checkout" xsi:type="array">
+                                <item name="component" xsi:type="string">Tychons_OnePageCheckout/js/checkout</item>
+                            </item>
+                            <item name="form" xsi:type="array">
+                                <item name="component" xsi:type="string">Tychons_OnePageCheckout/js/modal</item>
+                            </item>
+                            <!-- <item name="address" xsi:type="array">
+                                <item name="component" xsi:type="string">Tychons_OnePageCheckout/js/form-submit</item>
+                            </item> -->
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+               <block class="Tychons\OnePageCheckout\Block\LoginStatus" name="login_status_script" before="-">
+                <arguments>
+                    <argument name="template" xsi:type="string">Tychons_OnePageCheckout::login-status.phtml</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,20 @@
+<?php
+/** @var $block \Tychons\OrderTaxInfo\Block\Adminhtml\Order\View\Items */
+?>
+
+<div class="admin__page-section">
+    <div class="admin__page-left">
+        <div class="block-title">Tax Information</div>
+        <div class="block-content">
+            <p><strong>Total Tax: </strong><?php echo $block->escapeHtml($block->getOrderTaxAmount()); ?></p>
+            <?php if ($block->hasGstOrPst()) : ?>
+                <?php if ($block->getNepalGSTTaxAmount() > 0) : ?>
+                    <p><strong>Nepal-GST Tax: </strong><?php echo $block->escapeHtml($block->getNepalGSTTaxAmount()); ?></p>
+                <?php endif; ?>
+                <?php if ($block->getCanadaPSTTaxAmount() > 0) : ?>
+                    <p><strong>Canada-PST Tax: </strong><?php echo $block->escapeHtml($block->getCanadaPSTTaxAmount()); ?></p>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

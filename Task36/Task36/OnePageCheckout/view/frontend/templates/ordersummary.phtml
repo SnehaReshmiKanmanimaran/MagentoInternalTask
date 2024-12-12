@@ -1,0 +1,55 @@
+ <!-- Order Summary Section -->
+ <h2 style="color:blue;"><strong><u><i>Order Summary</i></u></strong></h2>
+    <div class="checkout-cart-index">
+        <?php
+        /** @var \Tychons\CustomOrderSummary\Block\OrderSummary $block */
+        $quote = $block->getQuote();
+        $items = [];
+        $totals = [];
+     
+        if ($quote) {
+            $items = $quote->getAllVisibleItems();
+            $totals = $block->getTotals();
+        }
+        ?>
+        <div class="cart-summary">
+            <h5><strong><u><?= __('Order Summary') ?></u></strong></h5>
+            <?php if ($quote && $items): ?>
+                <table class="data table totals">
+                    <thead>
+                        <tr>
+                            <th><?= __('Product Image') ?></th>
+                            <th><?= __('Product Name') ?></th>
+                            <th><?= __('Price') ?></th>
+                            <th><?= __('Qty') ?></th>
+                            <th><?= __('Subtotal') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($items as $item): ?>
+                            <tr>
+                                <td>
+                                    <img src="<?= $block->getImageUrl($item->getProduct()) ?>" alt="<?= $item->getName() ?>" width="75"/>
+                                </td>
+                                <td><?= $item->getName() ?></td>
+                                <td><?= $block->formatPrice($item->getPrice()) ?></td>
+                                <td><?= $item->getQty() ?></td>
+                                <td><?= $block->formatPrice($item->getRowTotal()) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                        <?php foreach ($totals as $total): ?>
+                            <tr class="totals">
+                                <th colspan="4" class="mark" scope="row"><?= $total->getTitle() ?></th>
+                                <td class="amount"><span class="price"><?= $block->formatPrice($total->getValue()) ?></span></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tfoot>
+                </table>
+            <?php else: ?>
+                <p><?= __('No items in your order summary.') ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+     

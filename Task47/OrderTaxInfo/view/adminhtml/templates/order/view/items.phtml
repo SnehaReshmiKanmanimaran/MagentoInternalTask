@@ -1,0 +1,15 @@
+<?php
+/** @var $block \Tychons\OrderTaxInfo\Block\Adminhtml\Order\View\Items */
+//$order = $block->getOrder();
+?>
+
+<div class="admin__page-section">
+    <div class="admin__page-left">
+        <div class="block-title">Tax Information</div>
+        <div class="block-content">
+            <p><strong>Total Tax: </strong><?php echo $block->escapeHtml($block->getOrderTaxAmount()); ?></p>
+            <p><strong>Canada-GST Tax: </strong><?php echo $block->escapeHtml($block->getCanadaGSTTaxAmount()); ?></p>
+            <p><strong>Canada-PST Tax: </strong><?php echo $block->escapeHtml($block->getCanadaPSTTaxAmount()); ?></p>
+        </div>
+    </div>
+</div>

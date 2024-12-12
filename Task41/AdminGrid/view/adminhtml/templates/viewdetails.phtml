@@ -1,0 +1,16 @@
+<?php
+/** @var \Tychons\AdminGrid\Block\Adminhtml\ViewDetails $block */
+?>
+<div class="view-details">
+    <h1>Log Entry Details</h1>
+    
+    <?php if ($details = $block->getDetails($block->getData('s_no'))): ?>
+        <ul>
+            <!-- <li><strong>S.No:</strong> <?php// echo $details['s_no']; ?></li> -->
+            <li><strong>Date:</strong> <?php echo $details['date']; ?></li>
+            <li><strong>Description:</strong> <?php echo $details['description']; ?></li>
+        </ul>
+    <?php else: ?>
+        <p>No details found for the specified log entry.</p>
+    <?php endif; ?>
+</div>

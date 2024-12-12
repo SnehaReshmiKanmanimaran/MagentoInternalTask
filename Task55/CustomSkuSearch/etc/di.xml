@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/di.xsd">
+    <!-- Plugin to modify search collection query for exact and partial matches -->
+    <type name="Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection">
+        <plugin name="custom_sku_search_plugin" type="Tychons\CustomSkuSearch\Plugin\QueryBuilder"/>
+    </type>  
+</config>

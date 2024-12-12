@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                grids_custom_customdataprovider_list.grids_custom_customdataprovider_list_data_source
+            </item>
+            <item name="deps" xsi:type="string">
+                grids_custom_customdataprovider_list.grids_custom_customdataprovider_list_data_source
+            </item>
+        </item>
+        <item name="spinner" xsi:type="string">grids_custom_customdataprovider_columns</item>
+    </argument>
+
+    <dataSource name="grids_custom_customdataprovider_list_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Tychons_AdminGrid::grids_custom_dp</aclResource>
+
+        <dataProvider class="Tychons\AdminGrid\Ui\Component\DataProvider\Custom" name="grids_custom_customdataprovider_list_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+
+         <exportButton class="Magento\Ui\Component\ExportButton">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="options" xsi:type="array">
+                    <item name="csv" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">grids/export/gridToCsv</item>
+                        <item name="formKey" xsi:type="boolean">true</item>
+                    </item>
+                       <item name="xml" xsi:type="array">
+                    <item name="value" xsi:type="string">xml</item>
+                    <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                    <item name="url" xsi:type="string">grids/export/gridToXml</item>
+                    <item name="formKey" xsi:type="boolean">true</item>
+                </item>
+                </item>
+            </item>
+        </argument>
+    </exportButton>
+    </listingToolbar>
+  
+    <columns name="grids_custom_customdataprovider_columns">
+
+        <column name="s_no" class="Magento\Ui\Component\Listing\Columns\Column">
+            <settings>
+                <label translate="true">S.No</label>
+                <sortable>false</sortable>
+                <filter>number</filter>
+            </settings>
+        </column>
+
+        <column name="date" class="Magento\Ui\Component\Listing\Columns\Date">
+            <settings>
+                <label translate="true">Date</label>
+                <sortable>true</sortable>
+                <filter>dateRange</filter>
+            </settings>
+        </column>
+
+        <column name="description" class="Magento\Ui\Component\Listing\Columns\Column">
+            <settings>
+                <label translate="true">Description</label>
+                <sortable>true</sortable>
+                <filter>text</filter>
+            </settings>
+        </column>
+
+         <actionsColumn name="actions" class="Tychons\AdminGrid\Ui\Component\Listing\Columns\Action">
+            <settings>
+                <indexField>s_no</indexField>  
+            </settings>
+        </actionsColumn>
+     
+    </columns>
+</listing>

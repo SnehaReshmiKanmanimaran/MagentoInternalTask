@@ -1,0 +1,16 @@
+<div class="heading" style="display: flex; align-items: center;">
+    <img src="<?= $escaper->escapeUrl($block->getViewFileUrl('Tychons_OnePageCheckout::images/basket.jpeg')) ?>" 
+     alt="My Image" 
+     width="35" 
+     height="45"  style="margin-right: 10px;">
+     <h1 style="margin: 0; font-size: 35px;"><strong>One Page Checkout Extension</strong></h1>
+</div>
+    <h2 style="color:blue;"><strong><u><i>Payment Methods</i></u></strong></h2>
+    <?php foreach ($block->getPaymentMethods() as $code => $data): ?>
+    <div>
+        <input type="radio" name="payment_method" value="<?php echo $code ?>" id="payment_method_<?php echo $code ?>" required>
+        <label for="payment_method_<?php echo $code ?>">
+            <?php echo isset($data['title']) ? $data['title'] : $code; ?>
+        </label>
+    </div>
+<?php endforeach; ?>

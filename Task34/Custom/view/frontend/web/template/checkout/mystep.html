@@ -1,0 +1,19 @@
+<li id="mynewstep" data-bind="fadeVisible: isVisible">
+        <div class="step-title bold-text" data-bind="i18n: 'Shipping Methods'" data-role="title"></div> 
+        <form id="shipping-method-form" data-bind="submit: navigateToNextStep">
+            <input type="radio" name="shipping_method" value="flatrate_flatrate" id="flatrate_flatrate" required>
+            <label for="flatrate_flatrate">Flat Rate</label><br>
+            <input type="radio" name="shipping_method" value="freeshipping_freeshipping" id="freeshipping_freeshipping" required>
+            <label for="freeshipping_freeshipping">Free Shipping</label><br>
+            <input type="radio" name="shipping_method" value="tablerate_bestway" id="tablerate_bestway" required>
+            <label for="tablerate_bestway">Table Rate</label><br>
+            <div class="actions-toolbar">
+                <div class="primary" style="margin-top: 20px;"> 
+                    <button data-role="opc-continue" type="submit" class="button action continue primary">
+                        <span data-bind="i18n: 'Next'"></span>
+                    </button>
+                </div>
+            </div>               
+        </form>
+    </li>
+     
