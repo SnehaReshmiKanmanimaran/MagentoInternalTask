@@ -65,3 +65,49 @@ Task 18 & 19:
           Need to display shipping address in the sales order view page in magento admin panel
           By using both graphql and Api
 -------------------------------------------------------
+Task 20
+Cron documentation
+Order Status documentation
+------------------------------------------------------
+Task 21
+Cron simple function module
+------------------------------------------------------
+Task 22
+Standalone documentation
+------------------------------------------------------
+Task 23
+Magento coding standard documentation
+------------------------------------------------------
+Task 24
+Inventory Management documentation
+-----------------------------------------------------
+Task25
+Update the code to change the order status to 'Payment Review' instead of 'Processing'
+when placing an order.
+Create a custom link with the name 'Validate' on the admin order view page before the
+cancel button link.
+Order status will change to processing when we click the 'Validate' link on the order view
+page.
+Also, we need to create another cron job to change the status to processing from Payment
+Review. The schedule time is 30 minutes
+-------------------------------------------------------
+Task 26
+Open comment extension module
+-------------------------------------------------------
+Task27
+Created a admin customer tab in customer edit page
+Display invoice related details when customer click invoice
+------------------------------------------------------
+Task28
+Created a new admin tab in customer edit page
+Display the credit card and order related details
+------------------------------------------------------
+Task29
+Magento Migration tool documentation
+----------------------------------------------------
+Task 30
+Magento upgrade compatibility tool
+----------------------------------------------------
+Task 31
+Magento Unit test cases
+-------------------------------------------------------
