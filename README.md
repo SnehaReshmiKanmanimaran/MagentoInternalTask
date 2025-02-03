@@ -66,48 +66,105 @@ Task 18 & 19:
           By using both graphql and Api
 -------------------------------------------------------
 Task 20
-Cron documentation
-Order Status documentation
+        Cron documentation
+        Order Status documentation
 ------------------------------------------------------
 Task 21
-Cron simple function module
+          Cron simple function module
 ------------------------------------------------------
 Task 22
-Standalone documentation
+      Standalone documentation
 ------------------------------------------------------
 Task 23
-Magento coding standard documentation
+      Magento coding standard documentation
 ------------------------------------------------------
 Task 24
 Inventory Management documentation
 -----------------------------------------------------
 Task25
-Update the code to change the order status to 'Payment Review' instead of 'Processing'
-when placing an order.
-Create a custom link with the name 'Validate' on the admin order view page before the
-cancel button link.
-Order status will change to processing when we click the 'Validate' link on the order view
-page.
-Also, we need to create another cron job to change the status to processing from Payment
-Review. The schedule time is 30 minutes
+        Update the code to change the order status to 'Payment Review' instead of 'Processing'
+        when placing an order.
+        Create a custom link with the name 'Validate' on the admin order view page before the
+        cancel button link.
+        Order status will change to processing when we click the 'Validate' link on the order view
+        page.
+        Also, we need to create another cron job to change the status to processing from Payment
+        Review. The schedule time is 30 minutes
 -------------------------------------------------------
 Task 26
-Open comment extension module
+        Open comment extension module
 -------------------------------------------------------
 Task27
-Created a admin customer tab in customer edit page
-Display invoice related details when customer click invoice
+        Created a admin customer tab in customer edit page
+        Display invoice related details when customer click invoice
 ------------------------------------------------------
 Task28
-Created a new admin tab in customer edit page
-Display the credit card and order related details
+        Created a new admin tab in customer edit page
+        Display the credit card and order related details
 ------------------------------------------------------
 Task29
-Magento Migration tool documentation
+        Magento Migration tool documentation
 ----------------------------------------------------
 Task 30
-Magento upgrade compatibility tool
+        Magento upgrade compatibility tool
 ----------------------------------------------------
 Task 31
-Magento Unit test cases
+        Magento Unit test cases
 -------------------------------------------------------
+Task 32
+        Page builder document
+------------------------------------------------------
+Task 33:
+        Admin issues and open known issues in magento 2
+------------------------------------------------------
+Task 34:
+        create custom shipping method section in checkout page 
+-----------------------------------------------------
+Task 35:
+        One page checkout Document
+-----------------------------------------------------
+Task 36:
+        create one page checkout extension 
+------------------------------------------------------
+Task 37:
+        Create checkout success page extension 
+------------------------------------------------------
+Task 38:
+        Issues faced while creating one page checkout extension document
+------------------------------------------------------
+Task 39:
+         Magento 2 git issues 
+-----------------------------------------------------
+Task 40:
+         Create product export button and both csv and xml file download format should be added create button in sales order viewpage 
+-------------------------------------------------------
+Task 41:
+         create a admin grid and display debug log details when view button is clicked it should redirect to new page and display logged date and time and error in description 
+-------------------------------------------------------
+Task 42:
+         create new open known issues in magento 2
+-------------------------------------------------------
+Task 43:
+         Magento realease php 8.3 compatibility 
+------------------------------------------------------
+Task 44:
+         Product export issue faced
+------------------------------------------------------
+Task 45:
+        upto task 44 created a detailed document of the task 
+-----------------------------------------------------
+Task 46:
+        Stock reservation and multi store inventory
+----------------------------------------------------
+Task 47:
+         displayed order tax information in mini cart
+----------------------------------------------------
+Task 48:
+         If a customer searches for a product and applies a filter (e.g., "Bag = Nike"), your custom adapter ensures Elasticsearch only returns results matching "Nike" bags".
+---------------------------------------------------
+Task 49:
+         display order tax information in admin sales order view page
+---------------------------------------------------
+Task 50:
+         Elastice search with catalog inde document
+----------------------------------------------------
