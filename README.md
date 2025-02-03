@@ -160,7 +160,7 @@ Task 47:
          displayed order tax information in mini cart
 ----------------------------------------------------
 Task 48:
-         If a customer searches for a product and applies a filter (e.g., "Bag = Nike"), your custom adapter ensures Elasticsearch only returns results matching "Nike" bags".
+        custom indexer programmatically
 ---------------------------------------------------
 Task 49:
          display order tax information in admin sales order view page
@@ -168,3 +168,33 @@ Task 49:
 Task 50:
          Elastice search with catalog inde document
 ----------------------------------------------------
+Task 51:
+         Difference between open search and elastic search 
+----------------------------------------------------
+Task 52:
+         to do list app creation using js
+------------------------------------------------------
+Task 53:
+         Index management document
+         created a cli command to run all index at a time 
+------------------------------------------------------
+Task 54:
+         If a customer searches for a product and applies a filter (e.g., "Bag = Nike"), your custom adapter ensures Elasticsearch only returns results matching "Nike" bags".
+-------------------------------------------------------
+Task 55:
+          when customer search with full sku need to display single product 
+          when customer search with partial sku need to display 2 products in magento 2
+--------------------------------------------------------
+Task 56:
+           Exception Handler Issue document
+---------------------------------------------------------
+Task 57:
+           cleared bug issue in 2.4.6 version date picker issue
+---------------------------------------------------------
+Task 58:
+           create cache button near flush cache button when the admin click my custom button it should work as cache clean button 
+--------------------------------------------------------
+Task 59:
+          Created a digital clock using js 
+--------------------------------------------------------
+         
